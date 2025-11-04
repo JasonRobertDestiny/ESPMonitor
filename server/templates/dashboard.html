@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESPMonitor - 环境监控系统</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌡️ ESPMonitor 环境监控</h1>
+            <div class="status">
+                <span id="connection-status" class="status-indicator offline">离线</span>
+                <span id="last-update">最后更新: --</span>
+            </div>
+        </header>
+
+        <!-- Real-time Data Display -->
+        <section class="data-cards">
+            <div class="card">
+                <div class="card-icon">🌡️</div>
+                <div class="card-content">
+                    <h3>温度</h3>
+                    <div class="value" id="temperature">--</div>
+                    <div class="unit">°C</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">💧</div>
+                <div class="card-content">
+                    <h3>湿度</h3>
+                    <div class="value" id="humidity">--</div>
+                    <div class="unit">%</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🌊</div>
+                <div class="card-content">
+                    <h3>水位</h3>
+                    <div class="value" id="water-level">--</div>
+                    <div class="unit">%</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Threshold Controls -->
+        <section class="threshold-section">
+            <h2>阈值设置</h2>
+            <div class="threshold-controls">
+                <div class="threshold-item">
+                    <label for="temp-threshold">温度阈值 (°C)</label>
+                    <div class="input-group">
+                        <input type="number" id="temp-threshold" value="30" step="0.5">
+                        <span class="current-value">当前: <span id="current-temp-threshold">30</span>°C</span>
+                    </div>
+                </div>
+
+                <div class="threshold-item">
+                    <label for="humidity-threshold">湿度阈值 (%)</label>
+                    <div class="input-group">
+                        <input type="number" id="humidity-threshold" value="70" step="1">
+                        <span class="current-value">当前: <span id="current-humidity-threshold">70</span>%</span>
+                    </div>
+                </div>
+
+                <div class="threshold-item">
+                    <label for="water-threshold">水位阈值 (%)</label>
+                    <div class="input-group">
+                        <input type="number" id="water-threshold" value="80" step="1">
+                        <span class="current-value">当前: <span id="current-water-threshold">80</span>%</span>
+                    </div>
+                </div>
+
+                <button id="update-thresholds" class="btn-primary">更新阈值</button>
+            </div>
+        </section>
+
+        <!-- Statistics -->
+        <section class="stats-section">
+            <h2>24小时统计</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>温度</h4>
+                    <div class="stat-values">
+                        <div class="stat-item">
+                            <span class="label">平均</span>
+                            <span id="avg-temp">--</span>°C
+                        </div>
+                        <div class="stat-item">
+                            <span class="label">最高</span>
+                            <span id="max-temp">--</span>°C
+                        </div>
+                        <div class="stat-item">
+                            <span class="label">最低</span>
+                            <span id="min-temp">--</span>°C
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <h4>湿度</h4>
+                    <div class="stat-values">
+                        <div class="stat-item">
+                            <span class="label">平均</span>
+                            <span id="avg-humidity">--</span>%
+                        </div>
+                        <div class="stat-item">
+                            <span class="label">最高</span>
+                            <span id="max-humidity">--</span>%
+                        </div>
+                        <div class="stat-item">
+                            <span class="label">最低</span>
+                            <span id="min-humidity">--</span>%
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <h4>水位</h4>
+                    <div class="stat-values">
+                        <div class="stat-item">
+                            <span class="label">平均</span>
+                            <span id="avg-water">--</span>%
+                        </div>
+                        <div class="stat-item">
+                            <span class="label">最高</span>
+                            <span id="max-water">--</span>%
+                        </div>
+                        <div class="stat-item">
+                            <span class="label">最低</span>
+                            <span id="min-water">--</span>%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent History -->
+        <section class="history-section">
+            <h2>最近读数</h2>
+            <div class="history-table-container">
+                <table id="history-table">
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>设备</th>
+                            <th>温度 (°C)</th>
+                            <th>湿度 (%)</th>
+                            <th>水位 (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-body">
+                        <tr>
+                            <td colspan="5" class="no-data">暂无数据</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>
+            <p>ESPMonitor v1.0 | 数据每5秒更新一次</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
